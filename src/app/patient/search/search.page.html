@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-toggle>
+            <ion-button><ion-icon size="large" name="menu"></ion-icon></ion-button>
+          </ion-menu-toggle>
+      </ion-buttons>
+    <ion-title text-center>Search Patient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+  <ion-grid>
+    <ion-row justify-content="center">
+      <ion-col size="3" sizeXs="6">
+        <ion-item>
+            <ion-label position="floating">FileId</ion-label>
+            <ion-input type="text" placeholder="Enter File Id" [(ngModel)]="searchFileId"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3" sizeXs="6">
+          <ion-item>
+              <ion-label position="floating">Patient Name</ion-label>
+              <ion-input type="text" placeholder="Enter Patient Name" [(ngModel)]="searchPatientName"></ion-input>
+          </ion-item>
+      </ion-col>
+      <ion-col size="4" sizeXs="8">
+          <ion-item>
+              <ion-label position="floating">Hospital</ion-label>
+              <ion-input type="text" placeholder="Enter Hospital" [(ngModel)]="searchHospital"></ion-input>
+          </ion-item>
+      </ion-col>
+      <ion-col sizeXs="4">
+        <ion-button expand="block" size="large" color="dark" (click)="searchPatient()"><ion-icon name="search"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-loading-spinner *ngIf="showLoader"></app-loading-spinner>
+    <ion-grid class="table" *ngIf="!showLoader">
+        <ion-row align-items="stretch" justify-content="center" class="header">
+            <ion-col size="4" text-center>File Id</ion-col>
+            <ion-col size="4" text-center>Patient Name</ion-col>
+            <ion-col size="4" text-center>Hospital</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of searchPatients" align-items="stretch" justify-content="center" >
+            <ion-card style="width:100%">
+              <ion-card-header>
+                      <ion-grid>
+                          <ion-row>
+                              <ion-col size="4" text-center>{{item.File_Number}}</ion-col>
+                              <ion-col size="4" text-center>{{item.Name}}</ion-col>
+                              <ion-col size="4" text-center>{{item.Hospital}}</ion-col>
+                          </ion-row>
+                      </ion-grid>
+              </ion-card-header>
+              <ion-card-content>
+                  <ion-grid>
+                      <ion-row>
+                          <ion-col size="4" text-center><ion-button size = "small" fill="solid" color="dark" (click)="toProfile(item.Aadhar_PAN)"><ion-icon name="create"></ion-icon></ion-button></ion-col>
+                          <ion-col size="4" text-center><ion-button size = "small" fill="solid" color="dark" (click)="toPatientServices(item.Aadhar_PAN,item.File_Number,item.Name)"><ion-icon name="settings"></ion-icon></ion-button></ion-col>
+                          <ion-col size="4" text-center><ion-button size = "small" fill="solid" color="dark" (click)="toShowServices(item.Aadhar_PAN,item.File_Number,item.Name)"><ion-icon name="list-box"></ion-icon></ion-button></ion-col>        
+                      </ion-row>
+                  </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-row>
+    </ion-grid>
+
+    </ion-list>
+</ion-content>

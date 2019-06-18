@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+          <ion-menu-toggle>
+            <ion-button><ion-icon size="large" name="menu"></ion-icon></ion-button>
+          </ion-menu-toggle>
+      </ion-buttons>
+    <ion-title>{{name}} : {{fileNo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngFor="let service of serviceList | async" routerLink="/services/{{service.id}}">
+      <div *ngIf="service.Patient_Aadhar_PAN == uniqueId">
+      <ion-card-header>
+          <ion-card-title>{{ service.Service }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Counsellor: {{ service.Counsellor }}
+      </ion-card-content>
+      <ion-card-content>
+          Amount: {{ service.Amount }}
+        </ion-card-content>
+        <ion-card-content>
+            Counselling Date: {{ service.Counselling_Date }}
+          </ion-card-content>
+          <ion-card-content>
+              Comments: {{ service.Comments }}
+            </ion-card-content>
+          </div>
+    </ion-card>    
+  </ion-content>

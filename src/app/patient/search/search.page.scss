@@ -1,0 +1,16 @@
+.table {
+    border: solid 1px grey;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.header {
+    background: black;
+    color: white;
+    font-weight: bold;
+    border-bottom: solid 1px grey;
+}
+
+.row-data:nth-child(even) {
+    background: lightgrey;
+}

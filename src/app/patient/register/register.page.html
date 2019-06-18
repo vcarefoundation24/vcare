@@ -1,0 +1,96 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-toggle>
+            <ion-button>
+               <ion-icon size="large" name="menu"></ion-icon>
+            </ion-button>
+         </ion-menu-toggle>
+      </ion-buttons>
+      <ion-title text-center>Patient Registration</ion-title>
+   </ion-toolbar>
+ </ion-header>
+ <ion-content padding>
+   <ion-list>
+      <ion-item>
+         <ion-label position="floating">Name</ion-label>
+         <ion-input type="text" [(ngModel)]="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">File Number</ion-label>
+         <ion-input type="text" [(ngModel)]="fileNo" required></ion-input>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Age</ion-label>
+         <ion-input type="number" [(ngModel)]="age" required></ion-input>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Aadhar/Pan</ion-label>
+         <ion-input type="string" [(ngModel)]="uniqueId" required></ion-input>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Sex</ion-label>
+         <ion-select [(ngModel)]="sex">
+         <ion-select-option value="Male">Male</ion-select-option>
+         <ion-select-option value="Female">Female</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Cancer Type</ion-label>
+         <ion-select [(ngModel)]="cancer">
+               <ion-select-option [value]="cancer.cancer" *ngFor="let cancer of arrayCancerTypes">{{cancer.cancer}}</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Income Level</ion-label>
+         <ion-select [(ngModel)]="incomelevel">
+         <ion-select-option value="Below Poverty Level">Below Poverty Level</ion-select-option>
+         <ion-select-option value="Above Poverty Level">Above Poverty Level</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Place of Stay</ion-label>
+         <ion-select [(ngModel)]="stay">
+         <ion-select-option value="Urban">Urban</ion-select-option>
+         <ion-select-option value="Rural">Rural</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">State</ion-label>
+         <ion-select [(ngModel)]="state">
+               <ion-select-option [value]="state.state" *ngFor="let state of arrayStates">{{state.state}}</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Hospital Type</ion-label>
+         <ion-select [(ngModel)]="hospitaltype">
+         <ion-select-option value="Private : Charged">Private : Charged</ion-select-option>
+         <ion-select-option value="Private : Non-Charged">Private : Non-Charged</ion-select-option>
+         <ion-select-option value="Government : Charged">Government : Charged</ion-select-option>
+         <ion-select-option value="Government : Non-Charged">Government : Non-Charged</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Associated Hospital</ion-label>
+         <ion-select [(ngModel)]="hospital">
+               <ion-select-option [value]="hospital.hospital" *ngFor="let hospital of arrayHospitalTypes">{{hospital.hospital}}</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Date of Admission</ion-label>
+         <ion-datetime [(ngModel)]="date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Ward Category</ion-label>
+         <ion-select [(ngModel)]="ward">
+         <ion-select-option value="Private">Private</ion-select-option>
+         <ion-select-option value="General">General</ion-select-option>
+         </ion-select>
+      </ion-item>
+      <ion-item>
+         <ion-label position="floating">Comments</ion-label>
+         <ion-input type="text" [(ngModel)]="comments"></ion-input>
+      </ion-item>
+   </ion-list>
+   <ion-button fill="solid" expand="block" color="dark" (click)="addPatient()">Add Patient</ion-button>
+ </ion-content>

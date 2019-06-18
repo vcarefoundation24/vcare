@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-toggle>
+            <ion-button><ion-icon size="large" name="menu"></ion-icon></ion-button>
+          </ion-menu-toggle>
+      </ion-buttons>      
+      <ion-title text-center>
+       Dashboard
+      </ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="refresh()"><ion-icon size="large" name="refresh"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content padding>
+  
+  <ion-list>
+      <ion-card>
+          <ion-card-header>
+            <ion-card-title>Patients Connected</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="!patientLoaded">
+              Loading....
+            </div>
+            <div *ngIf="patientLoaded">
+              {{patientConnected}}
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+              <ion-card-title>Volunteers Connected</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <div *ngIf="!volunteersLoaded">
+                Loading....
+              </div>
+              <div *ngIf="volunteersLoaded">
+                {{volunteersConnected}}
+              </div>
+            </ion-card-content>
+          </ion-card>
+            <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Patients Registered This Week</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <div *ngIf="!patientLoaded">
+                    Loading....
+                  </div>
+                  <div *ngIf="patientLoaded">
+                    {{patientRegisteredThisWeek}}
+                  </div>
+                </ion-card-content>
+              </ion-card>
+              <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Donations Made This Week</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div *ngIf="!donationsLoaded">
+                      Loading....
+                    </div>
+                    <div *ngIf="donationsLoaded">
+                      {{DonationMadeThisWeek}} - INR
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Total Donation</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div *ngIf="!totalDonationLoaded">
+                      Loading....
+                    </div>
+                    <div *ngIf="totalDonationLoaded">
+                      {{TotalDonation}} - INR
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+  </ion-list>    
+</ion-content>
