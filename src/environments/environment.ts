@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   firebase: {
     apiKey: "AIzaSyCeQKYOp3qJsy4WzXbGkOUato--r9O0HWA",
-  authDomain: "vcare-f78f9.firebaseapp.com",
-  databaseURL: "https://vcare-f78f9.firebaseio.com",
-  projectId: "vcare-f78f9",
-  storageBucket: "vcare-f78f9.appspot.com",
-  messagingSenderId: "278679102343",
-  appId: "1:278679102343:web:93d8bb0557ede52b"
+    authDomain: "vcare-f78f9.firebaseapp.com",
+    databaseURL: "https://vcare-f78f9.firebaseio.com",
+    projectId: "vcare-f78f9",
+    storageBucket: "vcare-f78f9.appspot.com",
+    messagingSenderId: "278679102343",
+    appId: "1:278679102343:web:93d8bb0557ede52b"
   }
 };
 

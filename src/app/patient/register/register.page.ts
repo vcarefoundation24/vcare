@@ -19,12 +19,15 @@ export class RegisterPage implements OnInit {
 	age: number = null;
 	sex: string = "";
   cancer: string = "";
+  othercancer: string = "";
   incomelevel: string = "";
   stay: string = "";
   state: string = "";
+  otherstate: string = "";
   hospitaltype: string = "";
   hospital: string = "";
-	date: string = "";
+  otherhospital: string = "";
+	date: string = this.formatDate(new Date())
   ward: string = "";
   comments: string = "";
   createDate: Date;
@@ -102,7 +105,7 @@ export class RegisterPage implements OnInit {
           this.loading.dismiss();
           let createdOn = this.eventService.getDateinTimeStamp(new Date());
 			    let updatedOn = createdOn;
-          const { name,fileNo,age,uniqueId,sex,cancer,incomelevel,stay,state,hospitaltype,hospital,date,ward,comments } = this;
+          const { name,fileNo,age,uniqueId,sex,cancer,othercancer,incomelevel,stay,state,otherstate,hospitaltype,hospital,otherhospital,date,ward,comments } = this;
           this.afstore.doc(`patients/${uniqueId}`).set({
             Name:name,
             File_Number : fileNo,
@@ -110,19 +113,23 @@ export class RegisterPage implements OnInit {
             Aadhar_PAN: uniqueId,
             Gender: sex,
             Cancer_Type : cancer,
+            Cancer_Type_Other : othercancer,
             Income_Level : incomelevel,
             Place_Of_Stay : stay,
             State : state,
+            State_Other : otherstate,
             Hospital_Type : hospitaltype,
             Hospital : hospital,
+            Hospital_Other : otherhospital,
             Date_Of_Admission : date,
             Ward : ward,
             Comments : comments,
             Created_TimeStamp : createdOn,
             Updated_TimeStamp : updatedOn
           }).then((response) => {
-            this.presentAlert('Success', 'Patient added successfully!')
-            this.alertForServices();
+            //this.presentAlert('Success', 'Patient added successfully!')
+
+            this.alertForServices(this.uniqueId, this.fileNo, this.name);
             this.reset();
           });
           
@@ -133,25 +140,26 @@ export class RegisterPage implements OnInit {
     }
     else{
       this.loading.dismiss();
-      this.presentAlert('Error','Please fill all the mandatory fields.');
+      this.presentAlert('Error','Please fill all the mandatory(*) fields.');
     }
     
     } 
 
-    async alertForServices(){
+    async alertForServices(uniqueId1, fileNo1, name1){
       const alert = await this.alertController.create({
         header: 'Patient Services',
-        message: 'Have you provided services to this patient?',
+        message: 'Patient added successfully. Have you provided services to this patient?',
         buttons: [
           {
             text: 'Yes',
             role: 'yes',
             handler: (blah) => {
+              
               let navigationExtras: NavigationExtras = {
                 queryParams: {
-                    uniqueId:  this.uniqueId,
-                    fileNo: this.fileNo,
-                    name: this.name
+                    uniqueId:  uniqueId1,
+                    fileNo: fileNo1,
+                    name: name1
                 }
              };
              this.reset();
@@ -167,22 +175,39 @@ export class RegisterPage implements OnInit {
     }
 
     validateFields(): boolean{
+
+      if(this.cancer=='Other' && this.othercancer=="")
+        return false;
+
+      if(this.hospital=='Other' && this.otherhospital=="")
+        return false;  
+
+      if(this.state=='Other' && this.otherstate=="")
+        return false;
+
       if(this.name == "" ||
           this.fileNo == "" ||
           this.age == null ||
           this.sex == "" ||
           this.cancer == "" ||
-          this.incomelevel == "" ||
-          this.stay == "" ||
           this.state == "" ||
-          this.hospitaltype == "" ||
           this.hospital == "" ||
-          this.date == "" ||
-          this.ward  == "" ||
-          this.comments == "")
+          this.date == "")
               return false;
       return true;
       
     }
+
+   formatDate(date) {
+      var d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+  
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+  
+      return [year, month, day].join('-');
+  }
    
 }

@@ -13,33 +13,39 @@
  <ion-content padding>
    <ion-list>
       <ion-item>
-         <ion-label position="floating">Name</ion-label>
+         <ion-label position="floating">Name<span>&nbsp;*</span></ion-label>
          <ion-input type="text" [(ngModel)]="name" required></ion-input>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">File Number</ion-label>
+         <ion-label position="floating">File Number<span>&nbsp;*</span></ion-label>
          <ion-input type="text" [(ngModel)]="fileNo" required></ion-input>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">Age</ion-label>
+         <ion-label position="floating">Age<span>&nbsp;*</span></ion-label>
          <ion-input type="number" [(ngModel)]="age" required></ion-input>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">Aadhar/Pan</ion-label>
+         <ion-label position="floating">Aadhar/Pan<span>&nbsp;*</span></ion-label>
          <ion-input type="string" [(ngModel)]="uniqueId" required></ion-input>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">Sex</ion-label>
+         <ion-label position="floating">Gender<span>&nbsp;*</span></ion-label>
          <ion-select [(ngModel)]="sex">
          <ion-select-option value="Male">Male</ion-select-option>
          <ion-select-option value="Female">Female</ion-select-option>
+         <ion-select-option value="Other">Other</ion-select-option>
          </ion-select>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">Cancer Type</ion-label>
+         <ion-label position="floating">Cancer Type<span>&nbsp;*</span></ion-label>
          <ion-select [(ngModel)]="cancer">
                <ion-select-option [value]="cancer.cancer" *ngFor="let cancer of arrayCancerTypes">{{cancer.cancer}}</ion-select-option>
+               <ion-select-option value="Other">Other</ion-select-option>
          </ion-select>
+      </ion-item>
+      <ion-item *ngIf="cancer=='Other'">
+         <ion-label position="floating">Other Cancer Type<span>&nbsp;*</span></ion-label>
+         <ion-input type="string" [(ngModel)]="othercancer"></ion-input>
       </ion-item>
       <ion-item>
          <ion-label position="floating">Income Level</ion-label>
@@ -56,10 +62,15 @@
          </ion-select>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">State</ion-label>
+         <ion-label position="floating">State<span>&nbsp;*</span></ion-label>
          <ion-select [(ngModel)]="state">
                <ion-select-option [value]="state.state" *ngFor="let state of arrayStates">{{state.state}}</ion-select-option>
+               <ion-select-option value="Other">Other</ion-select-option>
          </ion-select>
+      </ion-item>
+      <ion-item *ngIf="state=='Other'">
+         <ion-label position="floating">Other State<span>&nbsp;*</span></ion-label>
+         <ion-input type="string" [(ngModel)]="otherstate"></ion-input>
       </ion-item>
       <ion-item>
          <ion-label position="floating">Hospital Type</ion-label>
@@ -71,13 +82,18 @@
          </ion-select>
       </ion-item>
       <ion-item>
-         <ion-label position="floating">Associated Hospital</ion-label>
+         <ion-label position="floating">Associated Hospital<span>&nbsp;*</span></ion-label>
          <ion-select [(ngModel)]="hospital">
                <ion-select-option [value]="hospital.hospital" *ngFor="let hospital of arrayHospitalTypes">{{hospital.hospital}}</ion-select-option>
+               <ion-select-option value="Other">Other</ion-select-option>
          </ion-select>
       </ion-item>
+      <ion-item *ngIf="hospital=='Other'">
+         <ion-label position="floating">Other Hospital Type<span>&nbsp;*</span></ion-label>
+         <ion-input type="string" [(ngModel)]="otherhospital"></ion-input>
+      </ion-item>
       <ion-item>
-         <ion-label position="floating">Date of Admission</ion-label>
+         <ion-label position="floating">Date of Admission<span>&nbsp;*</span></ion-label>
          <ion-datetime [(ngModel)]="date"></ion-datetime>
       </ion-item>
       <ion-item>

@@ -20,9 +20,12 @@ export class ProfilePage implements OnInit {
   name: string = ""
 	age: number
 	sex: string = ""
-	cancer: string = ""
-	state: string = ""
-	hospital: string = ""
+  cancer: string = ""
+  othercancer: string = ""
+  state: string = ""
+  otherstate: string = ""
+  hospital: string = ""
+  otherhospital: string = ""
 	ward: string = ""
   para : any
   fileNo: string = "";
@@ -37,6 +40,7 @@ export class ProfilePage implements OnInit {
   public loading:HTMLIonLoadingElement;
   public arrayCancerTypes : any[];
   public arrayHospitalTypes: any[];
+  public arrayStates: any[];
   
 
   constructor(private route: ActivatedRoute,
@@ -60,9 +64,12 @@ export class ProfilePage implements OnInit {
         this.name = patientObj.Name;
         this.sex = patientObj.Gender;
         this.hospital = patientObj.Hospital;
+        this.otherhospital = patientObj.Hospital_Other;
         this.state = patientObj.State;
+        this.otherstate = patientObj.State_Other;
         this.ward = patientObj.Ward;
         this.cancer = patientObj.Cancer_Type;
+        this.othercancer = patientObj.Cancer_Type_Other;
         this.incomelevel = patientObj.Income_Level;
         this.stay = patientObj.Place_Of_Stay;
         this.hospitaltype = patientObj.Hospital_Type;
@@ -71,6 +78,7 @@ export class ProfilePage implements OnInit {
 
       this.arrayCancerTypes = eventService.getCancerTypeArray();
       this.arrayHospitalTypes = eventService.getHospitalTypeArray();
+      this.arrayStates = eventService.getStateArray();
      }
   ngOnInit() {
     
@@ -93,19 +101,30 @@ export class ProfilePage implements OnInit {
 
     if(this.validateFields()){
 
-      
+      if(this.cancer!='Other')
+        this.othercancer = ''
+
+      if(this.hospital!='Other')
+        this.otherhospital = ''
+
+      if(this.state!='Other')
+        this.otherstate = ''
+
       let updatedOn = this.eventService.getDateinTimeStamp(new Date());
-      const { fileNo,age,sex,cancer,incomelevel,stay,state,hospitaltype,hospital,ward,comments } = this
+      const { fileNo,age,sex,cancer,othercancer,incomelevel,stay,state,otherstate,hospitaltype,hospital,otherhospital,ward,comments } = this
       this.afstore.doc(`patients/${this.uniqueId}`).update({
         File_Number: fileNo,
         Age : age,
         Gender : sex,
         Cancer_Type : cancer,
+        Cancer_Type_Other : othercancer,
         Income_Level : incomelevel,
         Place_Of_Stay : stay,
         State : state,
+        State_Other : otherstate,
         Hospital_Type : hospitaltype,
         Hospital : hospital,
+        Hospital_Other : otherhospital,
         Ward : ward,
         Comments : comments
       }).then((response) =>{
@@ -132,40 +151,44 @@ export class ProfilePage implements OnInit {
     this.isDisabled = false;
   }
 
-  async deleteProfile(){
-    const alert = await this.alertController.create({
-      header: 'Confirm Delete',
-      message: 'Do you want to delete this patient\'s data?',
-      buttons: [
-        {
-          text: 'Yes',
-          role: 'yes',
-          handler: (blah) => {
-            this.afstore.collection("patients").doc(this.fileNo).delete();
-            this.router.navigate(['/searchPatient']);
-          }
-        }, {
-          text: 'No'
-        }
-      ]
-    });
+  // async deleteProfile(){
+  //   const alert = await this.alertController.create({
+  //     header: 'Confirm Delete',
+  //     message: 'Do you want to delete this patient\'s data?',
+  //     buttons: [
+  //       {
+  //         text: 'Yes',
+  //         role: 'yes',
+  //         handler: (blah) => {
+  //           this.afstore.collection("patients").doc(this.fileNo).delete();
+  //           this.router.navigate(['/searchPatient']);
+  //         }
+  //       }, {
+  //         text: 'No'
+  //       }
+  //     ]
+  //   });
 
-    await alert.present();
-  }
+  //   await alert.present();
+  // }
 
   validateFields(): boolean{
+
+    if(this.cancer=='Other' && this.othercancer=="")
+        return false;
+
+      if(this.hospital=='Other' && this.otherhospital=="")
+        return false;  
+
+      if(this.state=='Other' && this.otherstate=="")
+        return false;
 
     if(this.fileNo == "" ||
       this.age == null ||
 			this.sex == "" ||
 			this.cancer == null ||
 			this.state == "" ||
-			this.hospital == "" ||
-      this.ward == "" ||
-      this.incomelevel == null ||
-			this.stay == "" ||
-      this.hospitaltype == "" ||
-      this.comments == "")
+			this.hospital == "")
 				return false;
 		return true;
 	  }

@@ -26,14 +26,13 @@ export class DonationPage implements OnInit {
 
 	donationId: string = ""
 	name: string = "" 
-	date: string = ""
+	date: string = this.formatDate(new Date())
 	phone: string = ""
 	email: string = ""
 	address: string = ""
 	category: string = ""
 	modeOfDonation: string = ""
 	chkNumber: string = ""
-	currency: string = ""
 	amount: string = ""
 	nationality: string = ""
 	idType: string = ""
@@ -50,7 +49,6 @@ export class DonationPage implements OnInit {
 	) {
 		this.intitalizeNationalities();
 		this.initializeIdTypes();
-		this.initializeCurrency();
 	}
 
 	ngOnInit() {
@@ -74,17 +72,6 @@ export class DonationPage implements OnInit {
 		];
 	}
 
-	initializeCurrency() {
-		this.arrayCurrency = [
-			{ id: 1, curr: 'Indian Rupees', currCode: 'INR' } 
-			// { id: 2, curr: 'American Dollar', currCode: 'USD' },
-			// { id: 3, curr: 'Canadian Dollar', currCode: 'CAD' },
-			// { id: 4, curr: 'Australian Dollar', currCode: 'AUD' },
-			// { id: 5, curr: 'EURO', currCode: 'EUR' },
-			// { id: 6, curr: 'British Pound Sterling', currCode: 'GBP' }
-		]
-	}
-
 	reset(){
 		this.name = "" 
 		this.date = ""
@@ -95,7 +82,6 @@ export class DonationPage implements OnInit {
 		this.category = ""
 		this.modeOfDonation = ""
 		this.chkNumber = ""
-		this.currency = ""
 		this.amount = ""
 		this.nationality = ""
 		this.idType = ""
@@ -122,7 +108,7 @@ export class DonationPage implements OnInit {
 			this.donationId = this.afstore.createId();
 			this.CRE_TS = new Date().toLocaleString();
 	
-			const { donationId, name, date, phone, email, address, category, modeOfDonation, chkNumber, currency, amount, nationalityVal, idType, idValue, CRE_TS, comments } = this
+			const { donationId, name, date, phone, email, address, category, modeOfDonation, chkNumber, amount, nationalityVal, idType, idValue, CRE_TS, comments } = this
 			try {
 				this.afstore.doc(`donations/${donationId}`).set({
 					Name : name, 
@@ -132,8 +118,7 @@ export class DonationPage implements OnInit {
 					Address : address, 
 					Category : category, 
 					Mode_Of_Donation : modeOfDonation, 
-					Cheque_Number : chkNumber, 
-					Currency : currency['currCode'], 
+					Cheque_Number : chkNumber,
 					Amount : amount, 
 					Nationality : nationalityVal, 
 					ID_Type : idType, 
@@ -165,29 +150,26 @@ export class DonationPage implements OnInit {
 
 
 	validateFields(): boolean{
-
-		if(this.modeOfDonation=="Cheque" && this.chkNumber == "")
-			return false;
-
-		if(this.selectedIdTypes && this.idType == "")
-			return false;
 		
-
 		if(this.name == "" ||
 			this.date == "" ||
-			this.phone == null ||
-			this.email == "" ||
-			this.address == "" ||
-			this.category == "" ||
 			this.modeOfDonation == null ||
-			this.currency == "" ||
-			this.amount == "" ||
-			this.nationality == "" ||
-			this.idValue == "" ||
-			this.comments == "")
+			this.amount == "")
 				return false;
 		return true;
 	  }
+
+	  formatDate(date) {
+		var d = new Date(date),
+			month = '' + (d.getMonth() + 1),
+			day = '' + d.getDate(),
+			year = d.getFullYear();
+	
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+	
+		return [year, month, day].join('-');
+	}
 
 
 }

@@ -50,9 +50,14 @@
         <ion-item>
             <ion-label position="floating">Hospital</ion-label>
             <ion-select [(ngModel)]="hospital" [disabled]="isDisabled">
-					<ion-select-option [value]="hospital.hospital" *ngFor="let hospital of arrayHospitalTypes">{{hospital.hospital}}</ion-select-option>
+                    <ion-select-option [value]="hospital.hospital" *ngFor="let hospital of arrayHospitalTypes">{{hospital.hospital}}</ion-select-option>
+                    <ion-select-option value="Other">Other</ion-select-option>
 			</ion-select>
         </ion-item>
+        <ion-item *ngIf="hospital=='Other'">
+			<ion-label position="floating">Other Hospital Type<span>&nbsp;*</span></ion-label>
+			<ion-input type="string" [(ngModel)]="otherhospital" [disabled]="isDisabled"></ion-input>
+		 </ion-item>
         <ion-item>
             <ion-label position="floating">Contact Number</ion-label>
             <ion-input type="text" [(ngModel)]="phone" [disabled]="isDisabled"></ion-input>

@@ -46,7 +46,43 @@ export class EventService {
       { cancer: 'Osteosarcoma' }, 
       { cancer: 'Extremity Soft Tissue Sarcoma' },
       { cancer: 'Ewing\'s Carcoma' },
-      { cancer: 'Chondrosarcoma' }
+      { cancer: 'Chondrosarcoma' },
+      { cancer: 'AML' },
+
+
+
+      { cancer: 'ALL' },
+      { cancer: 'Blood Cancer' },
+      { cancer: 'CML' },
+
+      { cancer: 'Bone & Soft Tissue' },
+      { cancer: 'Head & Neck Cancer' },
+      { cancer: 'Metastatic Renal Cell Carcinoma--mRCC' },
+
+      { cancer: 'Kidney Cancer' },
+      { cancer: 'Non-Small Cell Lung Cancer - NSCLC' },
+      { cancer: 'Pancreatic Cancer' },
+
+      { cancer: 'Uterus Cancer' },
+      { cancer: 'Gynaecological Cancer' },
+      { cancer: 'Bladder Cancer' },
+
+      { cancer: 'Prostate Cancer' },
+      { cancer: 'Bone Cancer' },
+      { cancer: 'Childhood Cancer' },
+
+      { cancer: 'Eye Cancer/Retinoblastoma' },
+      { cancer: 'CLL' },
+      { cancer: 'Multiple Myeloma' },
+
+      { cancer: 'Melanoma' },
+      { cancer: 'Thyroid Cancer' },
+      { cancer: 'Vaginal Cancer' },
+
+      { cancer: 'Testicular Cancer' },
+      { cancer: 'Thoracic Cancer' },
+      { cancer: 'Colorectal Cancer' }
+
     ]
     
     this.arrayHospitalTypes = [
