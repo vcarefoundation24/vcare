@@ -18,6 +18,7 @@ export class MyprofilePage implements OnInit {
 	usertype: string = "";
 	address: string = "";
   hospital: string = "";
+  otherhospital: string = "";
   dob: string = "";
   phone: string = "";
   email: string = "";
@@ -55,6 +56,7 @@ export class MyprofilePage implements OnInit {
       this.usertype = userProfileSnapshot.data().User_Type;
       this.address = userProfileSnapshot.data().Address;
       this.hospital = userProfileSnapshot.data().Hospital;
+      this.otherhospital = userProfileSnapshot.data().Hospital_Other;
       this.dob = userProfileSnapshot.data().Date_Of_Birth;
       this.phone = userProfileSnapshot.data().Phone;
       this.email = userProfileSnapshot.data().Email;
@@ -71,8 +73,11 @@ export class MyprofilePage implements OnInit {
 
   updateDetails() {
     if(this.validateFields() == true){
+
         let updatedOn = (new Date()).toLocaleString();
-        this.profileService.updateProfile(this.hospital,this.phone,this.address, updatedOn).then(()=>{
+        if(this.hospital != 'Other')
+          this.otherhospital = '';
+        this.profileService.updateProfile(this.hospital,this.otherhospital,this.phone,this.address, updatedOn).then(()=>{
         this.isDisabled = true;
         this.userService.presentAlert('Success', 'Profile updated successfully!');
       },
@@ -88,6 +93,9 @@ export class MyprofilePage implements OnInit {
 
 	validateFields(): boolean{
 
+    if(this.hospital=='Other' && this.otherhospital=="")
+      return false;  
+      
 		if(this.hospital == "" ||
 			this.address == "" ||
 			this.phone == null)

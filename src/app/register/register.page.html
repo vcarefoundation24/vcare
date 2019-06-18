@@ -13,28 +13,28 @@
 	<ion-list>
 
 		<ion-item>
-			<ion-label position="floating">Name</ion-label>
+			<ion-label position="floating">Name<span>&nbsp;*</span></ion-label>
 			<ion-input type="text" [(ngModel)]="name"></ion-input>
 		</ion-item>
 
 		<ion-item>
-				<ion-label position="floating">Email</ion-label>
+				<ion-label position="floating">Email<span>&nbsp;*</span></ion-label>
 			<ion-input type="email" [(ngModel)]="email"></ion-input>
 		</ion-item>
 
 		<ion-item>
-				<ion-label position="floating">Address</ion-label>
+				<ion-label position="floating">Address<span>&nbsp;*</span></ion-label>
 			<ion-input type="text" [(ngModel)]="address"></ion-input>
 		</ion-item>
 
 		<ion-item>
-				<ion-label position="floating" pattern="[0-9]">Contact No</ion-label>
+				<ion-label position="floating" pattern="[0-9]">Contact No<span>&nbsp;*</span></ion-label>
 			<ion-input type="number" [(ngModel)]="phone"></ion-input>
 		</ion-item>
 
 		<ion-radio-group [(ngModel)]="gender">
 				<ion-list-header>
-					<ion-label>Gender</ion-label>
+					<ion-label>Gender<span>&nbsp;*</span></ion-label>
 				</ion-list-header>
 		
 				<ion-item>
@@ -59,14 +59,19 @@
 		</ion-item>
 
 		<ion-item>
-			<ion-label position="floating">Associated Hospital</ion-label>
+			<ion-label position="floating">Associated Hospital<span>&nbsp;*</span></ion-label>
 			<ion-select [(ngModel)]="hospital">
 					<ion-select-option [value]="hospital.hospital" *ngFor="let hospital of arrayHospitalTypes">{{hospital.hospital}}</ion-select-option>
+					<ion-select-option value="Other">Other</ion-select-option>
 			</ion-select>
 		</ion-item>
+		<ion-item *ngIf="hospital=='Other'">
+			<ion-label position="floating">Other Hospital Type<span>&nbsp;*</span></ion-label>
+			<ion-input type="string" [(ngModel)]="otherhospital"></ion-input>
+		 </ion-item>
 
 		<ion-item>
-			<ion-label position="floating">User Type</ion-label>
+			<ion-label position="floating">User Type<span>&nbsp;*</span></ion-label>
 			<ion-select [(ngModel)]="usertype">
 					<ion-select-option value="Staff">Staff</ion-select-option>
 					<ion-select-option value="Volunteer">Volunteer</ion-select-option>

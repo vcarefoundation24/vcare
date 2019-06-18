@@ -52,8 +52,8 @@ export class ProfileService {
     return this.userProfile;
   }
 
-  updateProfile(hospital: string,contact: string,address: string, updatedOn: any): Promise<any>{
-    return this.userProfile.update({Hospital : hospital, Phone : contact, Address : address, Updated_TimeStamp : updatedOn});
+  updateProfile(hospital: string,otherhospital: string, contact: string,address: string, updatedOn: any): Promise<any>{
+    return this.userProfile.update({Hospital : hospital, Hospital_Other : otherhospital, Phone : contact, Address : address, Updated_TimeStamp : updatedOn});
   }
 
   getUserName(): firebase.firestore.DocumentData {

@@ -32,6 +32,7 @@ export class RegisterPage implements OnInit {
 	gender: string = ""
 	usertype: string = ""
 	hospital: string = ""
+	otherhospital: string = ""
 	comments: string = ""
 	public loading:HTMLIonLoadingElement;
 	public arrayHospitalTypes: any[];
@@ -66,7 +67,7 @@ export class RegisterPage implements OnInit {
 
 			let createdOn = this.eventService.getDateinTimeStamp(new Date());
 			let updatedOn = createdOn;
-			const {name,email,phone,address,dob,usertype,gender,hospital, comments} = this
+			const {name,email,phone,address,dob,usertype,gender,hospital,otherhospital,comments} = this
 			this.loading = await this.loadingCtrl.create();
 			await this.loading.present();
 			this.app.auth().createUserWithEmailAndPassword(email, phone.toString()).then((response)=> {
@@ -78,17 +79,21 @@ export class RegisterPage implements OnInit {
 					Address : address,
 					Date_Of_Birth : dob,
 					Hospital : hospital,
+					Hospital_Other : otherhospital,
 					User_Type : usertype,
 					Comments : comments,
 					Created_TimeStamp : createdOn,
 					Updated_TimeStamp : updatedOn
 				});
 				let message:string = null;
-				if(usertype=="Tier 1"){
+				if(usertype=="Staff"){
 					message = "Staff " + name;
 				}
-				else{
+				else if(usertype=="Volunteer"){
 					message = "Volunteer " + name;
+				}
+				else{
+					message = "Admin " + name;
 				}
 				response.user.sendEmailVerification().then(()=>{
 					this.loading.dismiss().then(()=>{
@@ -110,21 +115,22 @@ export class RegisterPage implements OnInit {
 			});
 		}
 		else{
-			this.presentAlert('Error','Please fill all the mandatory fields.');
+			this.presentAlert('Error','Please enter all the mandatory(*) fields.');
 		}		
 	}
 
 	validateFields(): boolean{
 
+		if(this.hospital=='Other' && this.otherhospital=="")
+			return false;  
+		
 		if(this.name == "" ||
 			this.email == "" ||
 			this.phone == null ||
 			this.address == "" ||
-			this.dob == "" ||
 			this.gender == "" ||
 			this.usertype == "" ||
-			this.hospital == "" ||
-			this.comments == "")
+			this.hospital == "")
 				return false;
 		return true;
 		
