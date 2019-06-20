@@ -22,7 +22,7 @@ export class SuppliesPage implements OnInit {
   condifencebags: boolean = false
   braprosthesis: boolean = false
   wigs: boolean = false
-  cdate: string = ""
+  cdate: string = this.formatDate(new Date())
   comments: string = ""
 
   constructor(
@@ -178,11 +178,21 @@ validateFields(): boolean{
   if(this.counsellor == "" ||
     this.fileNo == "" ||
     this.patientName == null ||
-    this.cdate == "" ||
-    this.comments == "")
+    this.cdate == "" )
       return false;
   return true;
   }
 
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 }

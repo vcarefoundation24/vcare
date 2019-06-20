@@ -75,16 +75,16 @@ resetSearch(){
 searchPatient(){
   this.searchPatients = [];
   this.filter = {};
-  this.filter['File_Number']=this.searchFileId;
-  this.filter['Name']=this.searchPatientName;
-  this.filter['Hospital']=this.searchHospital;
+  this.filter['File_Number']=this.searchFileId.toLowerCase();
+  this.filter['Name']=this.searchPatientName.toLowerCase();
+  this.filter['Hospital']=this.searchHospital.toLowerCase();
   const keys = Object.keys(this.filter);
   this.searchPatients = this.patient.filter(object =>{
     return keys.every(item => {
       if(!this.filter[item].length){
-        return true;item
+        return true;
       }
-      return object[item].includes(this.filter[item]);
+      return object[item].toLowerCase().includes(this.filter[item]);
     });
   });
 }

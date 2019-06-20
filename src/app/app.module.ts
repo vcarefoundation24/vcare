@@ -20,7 +20,7 @@ import { ShareModule } from './share.module';
 import { ForgotPasswordPageModule } from './modals/forgot-password/forgot-password.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {File, FileEntry} from '@ionic-native/file/ngx'
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
 	declarations: [AppComponent],

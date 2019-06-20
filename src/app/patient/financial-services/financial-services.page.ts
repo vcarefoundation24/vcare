@@ -18,7 +18,7 @@ export class FinancialServicesPage implements OnInit {
 	patientName: string = ""
   service: string = ""
   amount: number = null
-  cdate: string = ""
+  cdate: string = this.formatDate(new Date())
   comments: string = ""
 
   constructor(
@@ -88,9 +88,20 @@ export class FinancialServicesPage implements OnInit {
 			this.patientName == null ||
       this.service == "" ||
       this.amount == null ||
-			this.cdate == "" ||
-			this.comments == "")
+			this.cdate == "")
 				return false;
 		return true;
-	  }
+    }
+    
+    formatDate(date) {
+      var d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+  
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+  
+      return [year, month, day].join('-');
+  }
 }

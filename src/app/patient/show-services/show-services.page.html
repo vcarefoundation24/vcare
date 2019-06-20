@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-card *ngFor="let service of serviceList | async" routerLink="/services/{{service.id}}">
       <div *ngIf="service.Patient_Aadhar_PAN == uniqueId">
       <ion-card-header>
