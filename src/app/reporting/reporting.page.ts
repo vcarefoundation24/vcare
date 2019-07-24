@@ -194,7 +194,8 @@ export class ReportingPage implements OnInit {
 
         }
         if(!isNullOrUndefined(report)){
-          this.excelService.exportToExcel(list,report,this.keys);
+          //this.excelService.exportToExcel(list,report,this.keys);
+          this.excelService.exportAsExcelFile(list,report);
         }
         else{
           this.userService.presentAlert('Error',"Please select the report for generation");

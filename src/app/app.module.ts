@@ -19,8 +19,9 @@ import {AuthGuard} from './services/user/auth.guard'
 import { ShareModule } from './share.module';
 import { ForgotPasswordPageModule } from './modals/forgot-password/forgot-password.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {File, FileEntry} from '@ionic-native/file/ngx'
+import {File} from '@ionic-native/file/ngx'
 import { environment } from 'src/environments/environment.prod';
+import { ExcelExportService } from './services/user/excel-export.service';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -47,6 +48,7 @@ import { environment } from 'src/environments/environment.prod';
 		AuthService,
 		AuthGuard,
 		File,
+		ExcelExportService,
 		{ provide: FirestoreSettingsToken, useValue: {} }
 	],
 	bootstrap: [AppComponent]
